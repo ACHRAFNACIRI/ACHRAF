@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('pdf-city').textContent = lastSubmittedData.ville_ar || '';
         document.getElementById('pdf-filiere').textContent = lastSubmittedData.filiereText || '';
         document.getElementById('pdf-niveau').textContent = lastSubmittedData.niveauText || '';
+        document.getElementById('pdf-annee-bac').textContent = lastSubmittedData.annee_bac || '-';
 
         const pdfPhoto = document.getElementById('pdf-photo');
         const pdfPhotoPlaceholder = document.getElementById('pdf-photo-placeholder');
