@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // التحقق مما إذا كان المستخدم مسجلاً مسبقاً في هذا الجهاز
+        const cinValue = document.getElementById('numero').value;
+        if (localStorage.getItem('registered_cin_' + cinValue)) {
+            alert("لقد قمت بالتسجيل مسبقاً بهذا الرقم! (Vous êtes déjà inscrit)");
+            return;
+        }
+
         // التحقق من الحقول المطلوبة
         let isValid = true;
         const requiredFields = form.querySelectorAll('[required]');
@@ -74,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
+            
+            // حفظ رقم البطاقة في الذاكرة المحلية لمنع التكرار
+            const cinValue = document.getElementById('numero').value;
+            localStorage.setItem('registered_cin_' + cinValue, 'true');
             
             showSuccess();
 
