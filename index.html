@@ -10,8 +10,7 @@
 </head>
 <body>
 
-
-    <div class="container">
+    <div class="container" id="mainContainer">
         <header class="header">
             <!-- الشعار -->
             <img src="logo.png" alt="ECIG SMART SCHOOL" class="school-logo" onerror="this.src='https://via.placeholder.com/800x200/FFFFFF/0F172A?text=ECIG+SMART+SCHOOL+1995';">
@@ -125,7 +124,7 @@
                 </div>
                 <div class="input-group full-width">
                     <label for="photo">صورة شخصية (Photo Personnelle) - الحد الأقصى 1 ميغابايت</label>
-                    <input type="file" id="photo" name="photo" accept="image/*" required style="padding: 0.6rem 1rem; background: var(--input-bg);">
+                    <input type="file" id="photo" name="photo" accept="image/*" required>
                     <small id="photo-error" style="color: var(--error); display: none; margin-top: 5px; font-weight: 500;">حجم الصورة يجب أن لا يتجاوز 1 ميغابايت (La taille de l'image ne doit pas dépasser 1 Mo).</small>
                 </div>
             </div>
@@ -160,7 +159,7 @@
 
             <h3 class="section-title">المعلومات الدراسية (Informations Scolaires)</h3>
             <div class="form-grid">
-                <div class="input-group">
+                <div class="input-group full-width">
                     <label for="niveau">المستوى الدراسي (Niveau d'études)</label>
                     <div class="select-wrapper">
                         <select id="niveau" name="niveau" required>
@@ -174,9 +173,6 @@
                         </select>
                     </div>
                 </div>
-
-                </div>
-
             </div>
 
             <h3 class="section-title">التكوين المطلوب (Formation Demandée)</h3>
@@ -204,7 +200,7 @@
                 </div>
             </div>
 
-            <div class="input-group full-width" style="flex-direction: row; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <div class="input-group full-width" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 20px; margin-bottom: 20px;">
                 <input type="checkbox" id="consent" name="consent" required style="width: 20px; height: 20px; cursor: pointer;">
                 <label for="consent" style="margin: 0; font-weight: 500; cursor: pointer;">أوافق على جميع شروط وقوانين التسجيل في مدرسة ECIG SMART SCHOOL وأتحمل المسؤولية الكاملة عن صحة المعلومات (J'accepte toutes les conditions d'inscription).</label>
             </div>
@@ -216,6 +212,7 @@
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </button>
+        </form>
     </div>
 
     <!-- Success Section (Initially Hidden) -->
