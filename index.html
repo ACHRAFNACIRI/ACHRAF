@@ -6,6 +6,7 @@
     <title>التسجيل - ECIG SMART SCHOOL</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -174,13 +175,6 @@
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label for="annee_bac">سنة الحصول على البكالوريا (Année du Bac)</label>
-                    <input type="number" id="annee_bac" name="annee_bac" placeholder="مثال: 2023" min="1990" max="2030">
-                </div>
-                <div class="input-group">
-                    <label for="etablissement_ar">المؤسسة السابقة (بالعربية)</label>
-                    <input type="text" id="etablissement_ar" name="etablissement_ar" placeholder="اسم المؤسسة بالعربية" dir="rtl">
                 </div>
 
             </div>
@@ -222,10 +216,107 @@
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </button>
-            <div id="successMessage" class="success-message hidden">
-                تم تسجيل معلوماتك بنجاح في ECIG SMART SCHOOL!
+    </div>
+
+    <!-- Success Section (Initially Hidden) -->
+    <div id="successSection" class="success-page hidden">
+        <div class="success-card">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
             </div>
-        </form>
+            <h2>شكراً لك! (Merci !)</h2>
+            <p class="main-msg">لقد تم استلام طلبك بنجاح في ECIG SMART SCHOOL.</p>
+            <p class="call-msg">سنتواصل معك هاتفياً في أقرب وقت ممكن لتأكيد تسجيلك.</p>
+            
+            <div class="success-actions">
+                <button id="downloadPdfBtn" class="submit-btn pdf-btn">
+                    <span>تحميل استمارة التسجيل (PDF)</span>
+                </button>
+                <button onclick="window.location.reload()" class="secondary-btn">
+                    <span>الرجوع للرئيسية</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Template (Hidden from view) -->
+    <div id="pdf-template" style="display: none; width: 800px; padding: 40px; background: white; color: black; font-family: 'Tajawal', sans-serif; direction: rtl;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #223785; padding-bottom: 20px; margin-bottom: 30px;">
+            <img src="logo.png" style="height: 80px;" onerror="this.style.display='none'">
+            <div style="text-align: left; direction: ltr;">
+                <h2 style="color: #223785; margin: 0;">ECIG SMART SCHOOL</h2>
+                <p style="margin: 5px 0; color: #666;">Ecole Centrale d'Informatique de Gestion Privée</p>
+                <p style="margin: 0; font-size: 12px;">Fondée en 1995</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #223785; text-decoration: underline;">وصل التسجيل الأولي (Fiche de Pré-inscription)</h1>
+            <p style="color: #F38C22; font-weight: bold;">الموسم الدراسي: 2025 / 2026</p>
+        </div>
+
+        <div style="display: flex; gap: 30px; margin-bottom: 30px;">
+            <div id="pdf-photo-container" style="width: 150px; height: 180px; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #f9f9f9;">
+                <img id="pdf-photo" src="" style="max-width: 100%; max-height: 100%; object-fit: cover;">
+                <span id="pdf-photo-placeholder" style="color: #ccc; font-size: 12px; text-align: center;">الصورة الشخصية</span>
+            </div>
+            
+            <div style="flex: 1;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #eee; background: #f5f5f5; width: 30%;"><strong>الاسم الكامل:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #eee;" id="pdf-full-name"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #eee; background: #f5f5f5;"><strong>Nom Complet:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #eee; direction: ltr; text-align: left;" id="pdf-full-name-fr"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #eee; background: #f5f5f5;"><strong>رقم البطاقة (CIN):</strong></td>
+                        <td style="padding: 8px; border: 1px solid #eee;" id="pdf-cin"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #eee; background: #f5f5f5;"><strong>تاريخ الازدياد:</strong></td>
+                        <td style="padding: 8px; border: 1px solid #eee;" id="pdf-dob"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h3 style="background: #223785; color: white; padding: 8px 15px; margin-bottom: 15px;">معلومات التواصل والدراسة</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+            <tr>
+                <td style="padding: 10px; border: 1px solid #eee; background: #f5f5f5; width: 25%;"><strong>رقم الهاتف:</strong></td>
+                <td style="padding: 10px; border: 1px solid #eee;" id="pdf-phone"></td>
+                <td style="padding: 10px; border: 1px solid #eee; background: #f5f5f5; width: 25%;"><strong>المدينة:</strong></td>
+                <td style="padding: 10px; border: 1px solid #eee;" id="pdf-city"></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #eee; background: #f5f5f5;"><strong>الشعبة المختارة:</strong></td>
+                <td colspan="3" style="padding: 10px; border: 1px solid #eee; font-weight: bold; color: #223785;" id="pdf-filiere"></td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #eee; background: #f5f5f5;"><strong>المستوى الدراسي:</strong></td>
+                <td colspan="3" style="padding: 10px; border: 1px solid #eee;" id="pdf-niveau"></td>
+            </tr>
+        </table>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 50px;">
+            <div style="text-align: center; width: 40%;">
+                <p>توقيع الطالب</p>
+                <div style="height: 100px; border: 1px dashed #ccc; margin-top: 10px;"></div>
+            </div>
+            <div style="text-align: center; width: 40%;">
+                <p>ختم الإدارة وتوقيعها</p>
+                <div style="height: 100px; border: 1px dashed #ccc; margin-top: 10px;"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; padding-top: 10px;">
+            مدرسة ECIG SMART SCHOOL - الدار البيضاء - الموقع الإلكتروني: www.ecig.ma
+        </div>
     </div>
 
     <script src="script.js"></script>
