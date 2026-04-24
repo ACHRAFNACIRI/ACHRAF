@@ -301,84 +301,95 @@
         </div>
     </div>
 
-    <!-- Ultra-Stable PDF Template -->
-    <div id="pdf-template" style="display: none; width: 650px; padding: 40px; background: white; color: black; font-family: 'Tajawal', sans-serif; direction: rtl; border: 1px solid #eee;">
+    <!-- Professional & Styled PDF Template -->
+    <div id="pdf-template" style="display: none; width: 750px; padding: 40px; background: white; color: #1e293b; font-family: 'Tajawal', sans-serif; direction: rtl; border: 10px double #223785; position: relative;">
         
-        <!-- Header: Logo Alone -->
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="logo.png" style="max-height: 80px;" onerror="this.style.display='none'">
+        <!-- Subtle Side Border Effect -->
+        <div style="position: absolute; top: 0; right: 0; width: 5px; height: 100%; background: #F38C22;"></div>
+
+        <!-- Header: Logo -->
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="logo.png" style="max-height: 90px;" onerror="this.style.display='none'">
+            <h1 style="color: #223785; margin: 15px 0 5px; font-size: 26px; border-bottom: 2px solid #F38C22; display: inline-block; padding-bottom: 5px;">ECIG SMART SCHOOL</h1>
+            <p style="margin: 0; color: #64748b; font-weight: 500;">Fiche de Pré-inscription Officielle</p>
         </div>
 
-        <div style="text-align: center; margin-bottom: 30px;">
-            <h2 style="color: #223785; margin: 0; font-size: 22px;">ECIG SMART SCHOOL</h2>
-            <p style="margin: 5px 0; color: #333; font-weight: bold;">وصل تسجيل أولي (Fiche de Pré-inscription)</p>
-            <p style="margin: 0; font-size: 13px; color: #666;">الموسم الدراسي: 2025 / 2026</p>
+        <div style="text-align: center; margin-bottom: 35px; background: #f8fafc; padding: 10px; border-radius: 8px;">
+            <p style="margin: 0; font-size: 16px; font-weight: bold; color: #223785;">الموسم الدراسي الحالي: 2025 / 2026</p>
         </div>
 
-        <!-- Identity Table -->
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
-            <tr>
-                <td colspan="2" style="padding: 10px; background: #f0f0f0; border: 1px solid #ccc; font-weight: bold; text-align: center;">المعلومات الشخصية (Identité)</td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc; width: 35%;">الاسم الكامل (Ar):</td>
-                <td style="padding: 10px; border: 1px solid #ccc;" id="pdf-full-name"></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc;">Nom Complet (Fr):</td>
-                <td style="padding: 10px; border: 1px solid #ccc; text-align: left; direction: ltr;" id="pdf-full-name-fr"></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc;">رقم البطاقة (CIN):</td>
-                <td style="padding: 10px; border: 1px solid #ccc; font-weight: bold;" id="pdf-cin"></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc;">تاريخ الازدياد:</td>
-                <td style="padding: 10px; border: 1px solid #ccc;" id="pdf-dob"></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc;">رقم الهاتف:</td>
-                <td style="padding: 10px; border: 1px solid #ccc;" id="pdf-phone"></td>
-            </tr>
-        </table>
+        <!-- Identity Section -->
+        <div style="margin-bottom: 25px;">
+            <div style="background: #223785; color: white; padding: 8px 15px; border-radius: 5px 5px 0 0; font-weight: bold;">
+                <span>1. المعلومات الشخصية (Informations Personnelles)</span>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #e2e8f0;">
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; width: 35%; font-weight: bold;">الاسم الكامل بالعربية:</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; font-size: 16px;" id="pdf-full-name"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; font-weight: bold;">Nom Complet (FR):</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: left; direction: ltr; font-size: 16px; font-weight: 500;" id="pdf-full-name-fr"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; font-weight: bold;">رقم البطاقة الوطنية (CIN):</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #223785;" id="pdf-cin"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; font-weight: bold;">تاريخ الازدياد:</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0;" id="pdf-dob"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; font-weight: bold;">رقم الهاتف:</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #F38C22;" id="pdf-phone"></td>
+                </tr>
+            </table>
+        </div>
 
-        <!-- Training Table -->
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-            <tr>
-                <td colspan="2" style="padding: 10px; background: #f0f0f0; border: 1px solid #ccc; font-weight: bold; text-align: center;">معلومات التسجيل (Inscription)</td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc; width: 35%;">المستوى الدراسي:</td>
-                <td style="padding: 10px; border: 1px solid #ccc;" id="pdf-niveau"></td>
-            </tr>
-            <tr>
-                <td style="padding: 10px; border: 1px solid #ccc;">سنة البكالوريا:</td>
-                <td style="padding: 10px; border: 1px solid #ccc;" id="pdf-annee-bac"></td>
-            </tr>
-            <tr>
-                <td style="padding: 15px; border: 1px solid #ccc; background: #fafafa; font-weight: bold; color: #223785;">الشعبة المختارة:</td>
-                <td style="padding: 15px; border: 1px solid #ccc; background: #fafafa; font-weight: bold; color: #223785; font-size: 16px;" id="pdf-filiere"></td>
-            </tr>
-        </table>
+        <!-- Registration Section -->
+        <div style="margin-bottom: 40px;">
+            <div style="background: #223785; color: white; padding: 8px 15px; border-radius: 5px 5px 0 0; font-weight: bold;">
+                <span>2. تفاصيل التسجيل (Détails d'Inscription)</span>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid #e2e8f0;">
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; width: 35%; font-weight: bold;">المستوى الدراسي الحالي:</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0;" id="pdf-niveau"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0; background: #f1f5f9; font-weight: bold;">سنة البكالوريا:</td>
+                    <td style="padding: 12px; border: 1px solid #e2e8f0;" id="pdf-annee-bac"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; border: 1px solid #e2e8f0; background: #fff7ed; font-weight: bold; color: #c2410c; font-size: 18px;">الشعبة المطلوبة:</td>
+                    <td style="padding: 15px; border: 1px solid #e2e8f0; background: #fff7ed; font-weight: bold; color: #223785; font-size: 18px;" id="pdf-filiere"></td>
+                </tr>
+            </table>
+        </div>
 
-        <!-- Signatures -->
-        <table style="width: 100%; margin-top: 40px;">
+        <!-- Signature Footer -->
+        <table style="width: 100%; margin-top: 20px;">
             <tr>
                 <td style="text-align: center; width: 50%;">
-                    <p style="text-decoration: underline;">توقيع الطالب</p>
-                    <div style="height: 100px; width: 200px; border: 1px solid #ddd; margin: 10px auto;"></div>
+                    <div style="padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; min-height: 120px;">
+                        <p style="margin: 0 0 40px; font-weight: bold; text-decoration: underline;">توقيع الطالب المعني</p>
+                        <p style="color: #94a3b8; font-size: 11px;">(Signature de l'étudiant)</p>
+                    </div>
                 </td>
                 <td style="text-align: center; width: 50%;">
-                    <p style="text-decoration: underline;">ختم الإدارة</p>
-                    <div style="height: 100px; width: 200px; border: 1px solid #ddd; margin: 10px auto;"></div>
+                    <div style="padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; min-height: 120px; position: relative;">
+                        <p style="margin: 0 0 40px; font-weight: bold; text-decoration: underline;">ختم وتوقيع الإدارة</p>
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; border: 3px double #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #e2e8f0; font-weight: bold; font-size: 10px;">CACHEТ</div>
+                    </div>
                 </td>
             </tr>
         </table>
 
-        <!-- Footer -->
-        <div style="margin-top: 80px; text-align: center; font-size: 11px; color: #777; border-top: 1px solid #eee; padding-top: 10px;">
-            <p>مدرسة ECIG SMART SCHOOL - الدار البيضاء</p>
-            <p>الموقع الإلكتروني: www.ecig.ma | الهاتف: 0681-461414</p>
+        <!-- Legal Footer -->
+        <div style="margin-top: 60px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 15px;">
+            <p style="margin-bottom: 5px;">مدرسة ECIG SMART SCHOOL - مدرسة معتمدة من طرف الدولة</p>
+            <p>المقر: الدار البيضاء | الهاتف: 0681-461414 | الموقع الإلكتروني: www.ecig.ma</p>
         </div>
     </div>
 
