@@ -284,7 +284,55 @@ input:focus, select:focus, textarea:focus {
     display: block;
 }
 
-@media (max-width: 992px) {
-    .form-grid { grid-template-columns: 1fr; }
-    .pro-form { padding: 1.5rem; }
+/* Responsiveness (PC & Mobile) */
+@media (max-width: 1024px) {
+    .container {
+        width: 98%;
+        padding: 1rem;
+    }
+    .form-grid {
+        grid-template-columns: 1fr; /* عمود واحد في الشاشات المتوسطة والصغيرة */
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .pro-form {
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+    .programs-title {
+        font-size: 1.5rem;
+    }
+    .footer-contact {
+        font-size: 1rem !important;
+    }
+    .school-logo {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+    .pro-form {
+        padding: 1rem;
+    }
+    .section-title {
+        font-size: 1.1rem;
+        margin: 1.5rem 0 1rem;
+    }
+    label {
+        font-size: 0.85rem;
+    }
+    input, select, textarea {
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+    }
+    .field-icon {
+        left: 0.75rem;
+    }
 }
