@@ -113,15 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function generatePDF() {
-        if (!lastSubmittedData) return;
-        
-        const btn = document.getElementById('downloadPdfBtn');
-        const originalBtnText = btn.innerHTML;
-        btn.innerHTML = "<span>جاري التحميل...</span>";
+        const element = document.getElementById('pdf-template');
+        if (!element || !lastSubmittedData) {
+            alert('خطأ في استرجاع البيانات. يرجى المحاولة مرة أخرى.');
+            return;
+        }
 
-        // ملء البيانات في القالب
-        document.getElementById('pdf-full-name').textContent = (lastSubmittedData.prenom_ar || '') + " " + (lastSubmittedData.nom_ar || '');
-        document.getElementById('pdf-full-name-fr').textContent = (lastSubmittedData.prenom_fr || '') + " " + (lastSubmittedData.nom_fr || '');
+        element.style.display = 'block';
+
+        // Fill data
+        document.getElementById('pdf-full-name').textContent = (lastSubmittedData.prenom_ar + ' ' + lastSubmittedData.nom_ar) || '';
+        document.getElementById('pdf-full-name-fr').textContent = (lastSubmittedData.prenom_fr + ' ' + lastSubmittedData.nom_fr).toUpperCase() || '';
         document.getElementById('pdf-cin').textContent = lastSubmittedData.numero || '';
         document.getElementById('pdf-dob').textContent = lastSubmittedData.date_naissance || '';
         document.getElementById('pdf-phone').textContent = lastSubmittedData.telephone || '';
@@ -132,35 +134,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pdfPhoto = document.getElementById('pdf-photo');
         const pdfPhotoPlaceholder = document.getElementById('pdf-photo-placeholder');
-        
-        if (lastSubmittedData.fullPhotoBase64) {
-            pdfPhoto.src = lastSubmittedData.fullPhotoBase64;
+
+        if (lastSubmittedData.photoData) {
+            pdfPhoto.src = lastSubmittedData.photoData;
             pdfPhoto.style.display = 'block';
-            pdfPhotoPlaceholder.style.display = 'none';
+            if (pdfPhotoPlaceholder) pdfPhotoPlaceholder.style.display = 'none';
         } else {
             pdfPhoto.style.display = 'none';
-            pdfPhotoPlaceholder.style.display = 'block';
+            if (pdfPhotoPlaceholder) pdfPhotoPlaceholder.style.display = 'block';
         }
 
-        const element = document.getElementById('pdf-template');
-        element.style.display = 'block';
-
         const opt = {
-            margin:       0.3,
-            filename:     `ECIG_Inscription_${lastSubmittedData.numero || 'Student'}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            margin: 0,
+            filename: `ECIG_Inscription_${lastSubmittedData.numero || 'Student'}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true, 
+                letterRendering: true,
+                scrollX: 0,
+                scrollY: 0
+            },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(element).save().then(() => {
             element.style.display = 'none';
-            btn.innerHTML = originalBtnText;
         }).catch(err => {
-            console.error("PDF Error:", err);
+            console.error('PDF Error:', err);
             element.style.display = 'none';
-            btn.innerHTML = originalBtnText;
-            alert("فشل تحميل الـ PDF. يمكنك المحاولة مرة أخرى.");
+            alert('حدث خطأ أثناء تحميل الملف. يرجى التأكد من أن متصفحك يدعم هذه الخاصية.');
         });
     }
 
