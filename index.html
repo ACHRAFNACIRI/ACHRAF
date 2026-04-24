@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التسجيل - ECIG SMART SCHOOL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+    <div class="container">
+        <header class="header">
+            <!-- الشعار -->
+            <img src="logo.png" alt="ECIG SMART SCHOOL" class="school-logo" onerror="this.src='https://via.placeholder.com/800x200/FFFFFF/0F172A?text=ECIG+SMART+SCHOOL+1995';">
+            
+            <h1>بوابة التسجيل</h1>
+            <p>Ecole Centrale d'Informatique de Gestion Privée</p>
+        </header>
+
+        <section class="programs-section">
+            <h2 class="programs-title">شعب التكوين المتاحة (Filières Disponibles)</h2>
+            <div class="programs-grid">
+                
+                <div class="program-card">
+                    <img src="tsdi.png" alt="Développement Informatique" class="program-img">
+                    <div class="program-content">
+                        <h4>TECHNICIEN SPECIALISE</h4>
+                        <h3>Développement Informatique</h3>
+                        <p>تكوين متخصص في البرمجة وتطوير البرمجيات وتطبيقات الويب والموبايل لتصبح خبيراً في تكنولوجيا المعلومات.</p>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <img src="tsge.png" alt="Gestion des Entreprises" class="program-img">
+                    <div class="program-content">
+                        <h4>TECHNICIEN SPECIALISE</h4>
+                        <h3>Gestion des Entreprises</h3>
+                        <p>إتقان تقنيات الإدارة والمحاسبة والتسويق لإدارة وتطوير الشركات والمقاولات الحديثة بكفاءة عالية.</p>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <img src="tstl.png" alt="Transport et Logistique" class="program-img">
+                    <div class="program-content">
+                        <h4>TECHNICIEN SPECIALISE</h4>
+                        <h3>Transport et Logistique</h3>
+                        <p>التخصص في سلسلة التوريد (Supply Chain)، والقدرة على إدارة تدفق البضائع وتحسين النقل اللوجستي.</p>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <img src="tsgi.png" alt="Gestion Informatisée" class="program-img">
+                    <div class="program-content">
+                        <h4>TECHNICIEN SPECIALISE</h4>
+                        <h3>Gestion Informatisée</h3>
+                        <p>الجمع بين مهارات التسيير الإداري وإتقان أدوات المعلوماتيات لتحقيق أقصى قدر من الكفاءة والدقة.</p>
+                    </div>
+                </div>
+
+                <div class="program-card">
+                    <img src="qos.png" alt="Opérateur de saisie" class="program-img">
+                    <div class="program-content">
+                        <h4>QUALIFICATION</h4>
+                        <h3>Opérateur de Saisie</h3>
+                        <p>تكوين عملي لإتقان أدوات المعلوميات والإدخال السريع والدقيق للبيانات والمعلومات.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="form-header">
+            <h2 class="form-main-title">استمارة التسجيل (Formulaire d'Inscription)</h2>
+            <p>المرجو ملء جميع المعلومات بعناية (Veuillez remplir toutes les informations avec soin)</p>
+        </div>
+
+        <form id="registrationForm" class="pro-form">
+            
+            <h3 class="section-title">المعلومات الشخصية (Informations Personnelles)</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="prenom_ar">الاسم (بالعربية)</label>
+                    <input type="text" id="prenom_ar" name="prenom_ar" placeholder="أدخل اسمك بالعربية" required dir="rtl">
+                </div>
+                <div class="input-group">
+                    <label for="prenom_fr">Prénom (en Français)</label>
+                    <input type="text" id="prenom_fr" name="prenom_fr" placeholder="Entrez votre prénom" required dir="ltr" style="text-align: left;">
+                </div>
+                <div class="input-group">
+                    <label for="nom_ar">النسب (بالعربية)</label>
+                    <input type="text" id="nom_ar" name="nom_ar" placeholder="أدخل نسبك بالعربية" required dir="rtl">
+                </div>
+                <div class="input-group">
+                    <label for="nom_fr">Nom (en Français)</label>
+                    <input type="text" id="nom_fr" name="nom_fr" placeholder="Entrez votre nom" required dir="ltr" style="text-align: left;">
+                </div>
+                <div class="input-group">
+                    <label for="numero">رقم البطاقة الوطنية (CIN)</label>
+                    <input type="text" id="numero" name="numero" placeholder="مثال: AB123456" required>
+                </div>
+                <div class="input-group">
+                    <label for="genre">الجنس (Genre)</label>
+                    <div class="select-wrapper">
+                        <select id="genre" name="genre" required>
+                            <option value="" disabled selected>اختر الجنس...</option>
+                            <option value="homme">ذكر (Homme)</option>
+                            <option value="femme">أنثى (Femme)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="date_naissance">تاريخ الازدياد (Date de naissance)</label>
+                    <input type="date" id="date_naissance" name="date_naissance" required>
+                </div>
+                <div class="input-group">
+                    <label for="lieu_naissance_ar">مكان الازدياد (بالعربية)</label>
+                    <input type="text" id="lieu_naissance_ar" name="lieu_naissance_ar" placeholder="مكان الازدياد بالعربية" required dir="rtl">
+                </div>
+                <div class="input-group">
+                    <label for="lieu_naissance_fr">Lieu de naissance (en Français)</label>
+                    <input type="text" id="lieu_naissance_fr" name="lieu_naissance_fr" placeholder="Lieu de naissance" required dir="ltr" style="text-align: left;">
+                </div>
+                <div class="input-group full-width">
+                    <label for="photo">صورة شخصية (Photo Personnelle) - الحد الأقصى 1 ميغابايت</label>
+                    <input type="file" id="photo" name="photo" accept="image/*" required style="padding: 0.6rem 1rem; background: var(--input-bg);">
+                    <small id="photo-error" style="color: var(--error); display: none; margin-top: 5px; font-weight: 500;">حجم الصورة يجب أن لا يتجاوز 1 ميغابايت (La taille de l'image ne doit pas dépasser 1 Mo).</small>
+                </div>
+            </div>
+
+            <h3 class="section-title">معلومات التواصل (Coordonnées)</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="telephone">رقم الهاتف (Téléphone)</label>
+                    <input type="tel" id="telephone" name="telephone" placeholder="06XX-XXXXXX" required dir="ltr" style="text-align: right;">
+                </div>
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني (Email)</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required dir="ltr" style="text-align: right;">
+                </div>
+                <div class="input-group">
+                    <label for="ville_ar">المدينة (بالعربية)</label>
+                    <input type="text" id="ville_ar" name="ville_ar" placeholder="أدخل مدينتك" required dir="rtl">
+                </div>
+                <div class="input-group">
+                    <label for="ville_fr">Ville (en Français)</label>
+                    <input type="text" id="ville_fr" name="ville_fr" placeholder="Entrez votre ville" required dir="ltr" style="text-align: left;">
+                </div>
+                <div class="input-group full-width">
+                    <label for="adresse_ar">العنوان (بالعربية)</label>
+                    <input type="text" id="adresse_ar" name="adresse_ar" placeholder="العنوان بالعربية" required dir="rtl">
+                </div>
+                <div class="input-group full-width">
+                    <label for="adresse_fr">Adresse (en Français)</label>
+                    <input type="text" id="adresse_fr" name="adresse_fr" placeholder="Adresse en français" required dir="ltr" style="text-align: left;">
+                </div>
+            </div>
+
+            <h3 class="section-title">المعلومات الدراسية (Informations Scolaires)</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="niveau">المستوى الدراسي (Niveau d'études)</label>
+                    <div class="select-wrapper">
+                        <select id="niveau" name="niveau" required>
+                            <option value="" disabled selected>اختر المستوى...</option>
+                            <option value="niveau_bac">مستوى بكالوريا (Niveau Bac)</option>
+                            <option value="bac">بكالوريا (Bac)</option>
+                            <option value="bac_plus_1">بكالوريا +1</option>
+                            <option value="bac_plus_2">بكالوريا +2 (Deug/BTS/DUT)</option>
+                            <option value="licence">إجازة (Licence)</option>
+                            <option value="autre">أخرى (Autre)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="annee_bac">سنة الحصول على البكالوريا (Année du Bac)</label>
+                    <input type="number" id="annee_bac" name="annee_bac" placeholder="مثال: 2023" min="1990" max="2030">
+                </div>
+                <div class="input-group">
+                    <label for="etablissement_ar">المؤسسة السابقة (بالعربية)</label>
+                    <input type="text" id="etablissement_ar" name="etablissement_ar" placeholder="اسم المؤسسة بالعربية" dir="rtl">
+                </div>
+
+            </div>
+
+            <h3 class="section-title">التكوين المطلوب (Formation Demandée)</h3>
+            <div class="form-grid">
+                <div class="input-group full-width">
+                    <label for="filiere">الشعبة (Filière)</label>
+                    <div class="select-wrapper">
+                        <select id="filiere" name="filiere" required>
+                            <option value="" disabled selected>اختر الشعبة...</option>
+                            <option value="tsdi">TECHNICIEN SPECIALISE Développement informatique</option>
+                            <option value="tsge">TECHNICIEN SPECIALISE GESTION DES ENTREPRISES</option>
+                            <option value="tstl">TECHNICIEN SPECIALISE en Transport et Logistique</option>
+                            <option value="tsgi">TECHNICIEN SPECIALISE Gestion Informatisée</option>
+                            <option value="qos">Q- Opérateur de saisie</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-title">معلومات إضافية (Informations Supplémentaires)</h3>
+            <div class="form-grid">
+                <div class="input-group full-width">
+                    <label for="message">ملاحظات أو رسالة (Message)</label>
+                    <textarea id="message" name="message" rows="3" placeholder="اكتب أي معلومات إضافية هنا..."></textarea>
+                </div>
+            </div>
+
+            <div class="input-group full-width" style="flex-direction: row; align-items: center; gap: 10px; margin-bottom: 20px;">
+                <input type="checkbox" id="consent" name="consent" required style="width: 20px; height: 20px; cursor: pointer;">
+                <label for="consent" style="margin: 0; font-weight: 500; cursor: pointer;">أوافق على صحة المعلومات المدخلة وأتحمل كامل المسؤولية عنها (J'accepte que les informations fournies soient exactes).</label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span>تأكيد التسجيل</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+            <div id="successMessage" class="success-message hidden">
+                تم تسجيل معلوماتك بنجاح في ECIG SMART SCHOOL!
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
