@@ -180,7 +180,7 @@ label {
 
 input, select, textarea {
     width: 100%;
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.25rem 1rem 3rem; /* مساحة للأيقونة من اليسار */
     background: #fafbfc;
     border: 2px solid var(--border-color);
     border-radius: 12px;
@@ -189,6 +189,25 @@ input, select, textarea {
     font-family: inherit;
     outline: none;
     transition: border-color 0.2s;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-icon {
+    position: absolute;
+    left: 1.25rem;
+    color: var(--text-muted);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+input:focus + .field-icon, select:focus + .field-icon, textarea:focus + .field-icon {
+    color: var(--primary);
 }
 
 input:focus, select:focus, textarea:focus {
