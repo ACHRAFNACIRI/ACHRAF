@@ -261,7 +261,24 @@ input:focus, select:focus, textarea:focus {
     display: none !important;
 }
 
-@media (max-width: 768px) {
+/* Footer Styles */
+.site-footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer-contact {
+    margin-top: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+@media (max-width: 992px) {
     .form-grid { grid-template-columns: 1fr; }
     .pro-form { padding: 1.5rem; }
 }
