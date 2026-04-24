@@ -35,8 +35,8 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1100px;
-    padding: 1rem 2rem 3rem;
+    max-width: 1300px; /* زيادة العرض ليكون أكثر اتساعاً */
+    padding: 1rem 1.5rem 3rem;
     z-index: 1;
 }
 
