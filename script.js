@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadPdfBtn = document.getElementById('downloadPdfBtn');
 
     // رابط الـ Web App الخاص بك
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbww_3On2wnJtY6dJ3iPCbSAuSjmgtTgpg2y1Xh441IeZ-JyOMUXZoEGG7T3eaxVQsR1/exec";
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhCBJuiEkb0PW7Cuaq0IySSuyl4BqrGgWMgt6FCElzFh4uSeBAHplKnwiCaY2p8JK33Q/exec';
 
     let lastSubmittedData = null;
 
