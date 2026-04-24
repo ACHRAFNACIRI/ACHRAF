@@ -1,16 +1,19 @@
 :root {
-    --primary: #223785; /* ECIG Blue */
-    --primary-hover: #182760;
-    --secondary: #F38C22; /* SMART Orange */
-    --secondary-hover: #e07b1a;
-    --bg-color: #F8FAFC; /* Light gray background */
-    --text-main: #1E293B; /* Dark slate for text */
-    --text-muted: #64748B;
-    --border-color: #CBD5E1;
-    --input-bg: #FFFFFF;
-    --form-bg: #FFFFFF;
-    --error: #EF4444;
-    --success: #10B981;
+    --primary: #223785;
+    --primary-light: #3a51a8;
+    --primary-dark: #182760;
+    --secondary: #F38C22;
+    --secondary-light: #ffa64d;
+    --secondary-dark: #e07b1a;
+    --bg-color: #f0f4f8;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --border-color: #dfe6e9;
+    --input-bg: #ffffff;
+    --form-bg: #ffffff;
+    --error: #e74c3c;
+    --success: #27ae60;
+    --shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 * {
@@ -208,29 +211,49 @@ label {
 
 input, select, textarea {
     width: 100%;
-    padding: 0.875rem 1rem;
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    background: #fafbfc;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
     color: var(--text-main);
     font-size: 1rem;
     font-family: 'Tajawal', sans-serif;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-input::placeholder, textarea::placeholder {
-    color: #94A3B8;
+input:hover, select:hover, textarea:hover {
+    border-color: var(--primary-light);
+    background: #fff;
 }
 
 input:focus, select:focus, textarea:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(34, 55, 133, 0.15);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(34, 55, 133, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Photo input specific style */
+input[type="file"] {
+    padding: 0.75rem;
+    cursor: pointer;
+    background: linear-gradient(to left, #fafbfc, #fff);
+}
+
+input[type="file"]::file-selector-button {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--primary-dark);
 }
 
 /* Custom Select styling */
@@ -262,12 +285,12 @@ select {
 .submit-btn {
     width: 100%;
     margin-top: 3rem;
-    padding: 1rem 1.5rem;
-    background-color: var(--primary);
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     color: white;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     font-weight: 700;
     font-family: 'Tajawal', sans-serif;
     cursor: pointer;
@@ -275,11 +298,14 @@ select {
     justify-content: center;
     align-items: center;
     gap: 0.75rem;
-    transition: background-color 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 55, 133, 0.3);
 }
 
 .submit-btn:hover {
-    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 55, 133, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
 }
 
 .submit-btn svg {
