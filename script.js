@@ -83,14 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const niveauSelect = document.getElementById('niveau');
             lastSubmittedData.niveauText = niveauSelect.options[niveauSelect.selectedIndex].text;
 
-            // إرسال البيانات
+            // إرسال البيانات (طريقة URLSearchParams لضمان الوصول للجوجل شيت)
             if (SCRIPT_URL) {
+                const params = new URLSearchParams();
+                for (const key in data) {
+                    params.append(key, data[key]);
+                }
+
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    body: params
                 }).catch(err => console.error("Fetch error:", err));
             }
             
