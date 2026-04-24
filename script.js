@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (photoInput) {
         photoInput.addEventListener('change', function() {
             if (this.files && this.files[0]) {
-                if (this.files[0].size > 1048576) { // 1 MB = 1048576 bytes
+                if (this.files[0].size > 1048576) {
                     photoError.style.display = 'block';
                     this.value = ''; 
                     this.style.borderColor = 'var(--error)';
@@ -30,39 +30,43 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // التحقق مما إذا كان المستخدم مسجلاً مسبقاً في هذا الجهاز
+        // 1. التحقق من التكرار
         const cinValue = document.getElementById('numero').value;
         if (localStorage.getItem('registered_cin_' + cinValue)) {
             alert("لقد قمت بالتسجيل مسبقاً بهذا الرقم! (Vous êtes déjà inscrit)");
             return;
         }
 
-        // التحقق من الحقول المطلوبة
-        let isValid = true;
+        // 2. التحقق من الحقول (Browser validation handles most, but we double check)
         const requiredFields = form.querySelectorAll('[required]');
-        
+        let firstInvalid = null;
+
         requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
+            if (!field.value || !field.value.trim()) {
                 field.style.borderColor = 'var(--error)';
+                if (!firstInvalid) firstInvalid = field;
             } else {
                 field.style.borderColor = 'var(--border-color)';
             }
         });
 
-        if (!isValid) return;
+        if (firstInvalid) {
+            firstInvalid.focus();
+            alert("يرجى ملء جميع الخانات المطلوبة (Veuillez remplir tous les champs)");
+            return;
+        }
 
-        // تغيير حالة الزر إلى "جاري الإرسال"
+        // 3. الإرسال
         const originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>جاري الإرسال...</span>`;
+        submitBtn.innerHTML = `<span>جاري معالجة طلبك...</span>`;
 
         try {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            lastSubmittedData = data;
+            lastSubmittedData = { ...data };
 
-            // تحويل الصورة إلى Base64 إذا وجدت
+            // معالجة الصورة
             if (photoInput && photoInput.files[0]) {
                 const file = photoInput.files[0];
                 const base64 = await toBase64(file);
@@ -72,80 +76,90 @@ document.addEventListener('DOMContentLoaded', () => {
                 lastSubmittedData.fullPhotoBase64 = base64;
             }
 
-            // حفظ نص الشعبة المختار قبل الإرسال
+            // حفظ نصوص الاختيارات للـ PDF
             const filiereSelect = document.getElementById('filiere');
             lastSubmittedData.filiereText = filiereSelect.options[filiereSelect.selectedIndex].text;
+            
+            const niveauSelect = document.getElementById('niveau');
+            lastSubmittedData.niveauText = niveauSelect.options[niveauSelect.selectedIndex].text;
 
-            if (!SCRIPT_URL || SCRIPT_URL.includes("URL_HERE")) {
-                console.warn("رابط Google Script غير مفعل.");
-            } else {
-                await fetch(SCRIPT_URL, {
+            // إرسال البيانات (بشكل غير متزامن لعدم تعطيل المستخدم)
+            if (SCRIPT_URL && !SCRIPT_URL.includes("URL_HERE")) {
+                fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
-                });
+                }).catch(err => console.error("Fetch error:", err));
             }
             
-            // حفظ رقم البطاقة في الذاكرة المحلية
+            // حفظ في الذاكرة المحلية
             localStorage.setItem('registered_cin_' + cinValue, 'true');
             
+            // إظهار صفحة النجاح فوراً
             showSuccessPage();
 
         } catch (error) {
-            console.error('Error:', error);
-            alert("حدث خطأ أثناء الإرسال. تأكد من إعدادات Google Sheets.");
-        } finally {
+            console.error('Submission error:', error);
+            alert("حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.");
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;
         }
     });
 
-    // وظيفة تحميل الـ PDF
     if (downloadPdfBtn) {
-        downloadPdfBtn.addEventListener('click', () => {
-            if (!lastSubmittedData) return;
+        downloadPdfBtn.addEventListener('click', generatePDF);
+    }
 
-            // ملء بيانات القالب
-            document.getElementById('pdf-full-name').textContent = `${lastSubmittedData.prenom_ar} ${lastSubmittedData.nom_ar}`;
-            document.getElementById('pdf-full-name-fr').textContent = `${lastSubmittedData.prenom_fr} ${lastSubmittedData.nom_fr}`;
-            document.getElementById('pdf-cin').textContent = lastSubmittedData.numero;
-            document.getElementById('pdf-dob').textContent = lastSubmittedData.date_naissance;
-            document.getElementById('pdf-phone').textContent = lastSubmittedData.telephone;
-            document.getElementById('pdf-city').textContent = lastSubmittedData.ville_ar;
-            document.getElementById('pdf-filiere').textContent = lastSubmittedData.filiereText;
-            
-            const niveauSelect = document.getElementById('niveau');
-            const niveauText = niveauSelect.options[niveauSelect.selectedIndex].text;
-            document.getElementById('pdf-niveau').textContent = niveauText;
+    function generatePDF() {
+        if (!lastSubmittedData) return;
+        
+        const btn = document.getElementById('downloadPdfBtn');
+        const originalBtnText = btn.innerHTML;
+        btn.innerHTML = "<span>جاري التحميل...</span>";
 
-            // إضافة الصورة للـ PDF
-            const pdfPhoto = document.getElementById('pdf-photo');
-            const pdfPhotoPlaceholder = document.getElementById('pdf-photo-placeholder');
-            if (lastSubmittedData.fullPhotoBase64) {
-                pdfPhoto.src = lastSubmittedData.fullPhotoBase64;
-                pdfPhoto.style.display = 'block';
-                pdfPhotoPlaceholder.style.display = 'none';
-            } else {
-                pdfPhoto.style.display = 'none';
-                pdfPhotoPlaceholder.style.display = 'block';
-            }
+        // ملء البيانات في القالب
+        document.getElementById('pdf-full-name').textContent = (lastSubmittedData.prenom_ar || '') + " " + (lastSubmittedData.nom_ar || '');
+        document.getElementById('pdf-full-name-fr').textContent = (lastSubmittedData.prenom_fr || '') + " " + (lastSubmittedData.nom_fr || '');
+        document.getElementById('pdf-cin').textContent = lastSubmittedData.numero || '';
+        document.getElementById('pdf-dob').textContent = lastSubmittedData.date_naissance || '';
+        document.getElementById('pdf-phone').textContent = lastSubmittedData.telephone || '';
+        document.getElementById('pdf-city').textContent = lastSubmittedData.ville_ar || '';
+        document.getElementById('pdf-filiere').textContent = lastSubmittedData.filiereText || '';
+        document.getElementById('pdf-niveau').textContent = lastSubmittedData.niveauText || '';
 
-            const element = document.getElementById('pdf-template');
-            element.style.display = 'block';
+        const pdfPhoto = document.getElementById('pdf-photo');
+        const pdfPhotoPlaceholder = document.getElementById('pdf-photo-placeholder');
+        
+        if (lastSubmittedData.fullPhotoBase64) {
+            pdfPhoto.src = lastSubmittedData.fullPhotoBase64;
+            pdfPhoto.style.display = 'block';
+            pdfPhotoPlaceholder.style.display = 'none';
+        } else {
+            pdfPhoto.style.display = 'none';
+            pdfPhotoPlaceholder.style.display = 'block';
+        }
 
-            const opt = {
-                margin:       0.5,
-                filename:     `Inscription_${lastSubmittedData.nom_fr}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
+        const element = document.getElementById('pdf-template');
+        element.style.display = 'block';
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.style.display = 'none';
-            });
+        const opt = {
+            margin:       0.3,
+            filename:     `ECIG_Inscription_${lastSubmittedData.numero || 'Student'}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            element.style.display = 'none';
+            btn.innerHTML = originalBtnText;
+        }).catch(err => {
+            console.error("PDF Error:", err);
+            element.style.display = 'none';
+            btn.innerHTML = originalBtnText;
+            alert("فشل تحميل الـ PDF. يمكنك المحاولة مرة أخرى.");
         });
     }
 
@@ -159,8 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showSuccessPage() {
-        // إخفاء المحتوى الرئيسي وإظهار صفحة النجاح
-        document.querySelector('.container').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'none';
         successSection.classList.remove('hidden');
         window.scrollTo(0, 0);
     }
